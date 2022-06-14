@@ -1,8 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, sort_child_properties_last, use_key_in_widget_constructors
 
-import 'dart:ffi';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:training_one/custom.dart';
@@ -26,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: changabltheme().gettheme(),
-      home: animcon(),
+      home: animlist(),
     );
   }
 }

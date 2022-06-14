@@ -1424,9 +1424,7 @@ class _themessState extends State<themess> {
         children: [
           ElevatedButton(
               onPressed: () {
-                setState(() {
-                  
-                });
+                setState(() {});
               },
               child: Text("data"))
         ],
@@ -1434,7 +1432,6 @@ class _themessState extends State<themess> {
     );
   }
 }
-
 
 class alignanim extends StatefulWidget {
   const alignanim({Key? key}) : super(key: key);
@@ -1529,6 +1526,212 @@ class _animconState extends State<animcon> {
           });
         },
       ),
+    );
+  }
+}
+
+class animcross extends StatefulWidget {
+  const animcross({Key? key}) : super(key: key);
+
+  @override
+  State<animcross> createState() => _animcrossState();
+}
+
+class _animcrossState extends State<animcross> {
+  bool a = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: AnimatedCrossFade(
+            firstChild: InkWell(
+              onTap: () => setState(() {
+                a = !a;
+              }),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.blueAccent,
+              ),
+            ),
+            secondChild: InkWell(
+              onTap: () => setState(() {
+                a = !a;
+              }),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.red,
+              ),
+            ),
+            crossFadeState:
+                a ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            duration: Duration(milliseconds: 500)),
+      ),
+    );
+  }
+}
+
+class animmopa extends StatefulWidget {
+  const animmopa({Key? key}) : super(key: key);
+
+  @override
+  State<animmopa> createState() => _animmopaState();
+}
+
+class _animmopaState extends State<animmopa> {
+  bool op = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedOpacity(
+              opacity: op ? 1 : 0,
+              duration: Duration(milliseconds: 500),
+              child: FlutterLogo(
+                size: 100,
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    op = !op;
+                  });
+                },
+                child: Text("press")),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class animbuilder extends StatefulWidget {
+  const animbuilder({Key? key}) : super(key: key);
+
+  @override
+  State<animbuilder> createState() => _animbuilderState();
+}
+
+class _animbuilderState extends State<animbuilder>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Transform.rotate(
+                angle: _controller.value * pi * 2,
+                child: child,
+              );
+            },
+            child: FlutterLogo(
+              size: 100,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class defaultextanim extends StatefulWidget {
+  const defaultextanim({Key? key}) : super(key: key);
+
+  @override
+  State<defaultextanim> createState() => _defaultextanimState();
+}
+
+class _defaultextanimState extends State<defaultextanim> {
+  bool c = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: AnimatedDefaultTextStyle(
+                child: Text("zaid"),
+                style: TextStyle(
+                  color: c ? Colors.blueGrey : Colors.black,
+                  fontSize: c ? 30 : 50,
+                ),
+                duration: Duration(milliseconds: 500)),
+          ),
+          ElevatedButton(
+              onPressed: () => setState(() {
+                    c = !c;
+                  }),
+              child: Text("press"))
+        ],
+      ),
+    );
+  }
+}
+
+class animlist extends StatefulWidget {
+  const animlist({Key? key}) : super(key: key);
+
+  @override
+  State<animlist> createState() => _animlistState();
+}
+
+class _animlistState extends State<animlist> {
+  final GlobalKey<AnimatedListState> _globalKey =
+      GlobalKey<AnimatedListState>();
+  List<int> item = [];
+  int counter = 0;
+  void _addItem() {
+    item.insert(item.length, item.length);
+    _globalKey.currentState!
+        .insertItem(item.length-1, duration: const Duration(seconds: 1));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: AnimatedList(
+        key: _globalKey,
+        initialItemCount: item.length,
+        itemBuilder: ((context, index, animation) => SlideTransition(
+              position: Tween<Offset>(begin: Offset(0, -1), end: Offset(0, 0))
+                  .animate(animation),
+              child: Container(
+                  height: 100,
+                  color: Colors.blueAccent,
+                  child: Center(
+                      child: Text(
+                    "Item $index",
+                  ))),
+            )),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: _addItem, child: const Icon(Icons.add)),
     );
   }
 }
