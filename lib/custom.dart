@@ -1735,3 +1735,306 @@ class _animlistState extends State<animlist> {
     );
   }
 }
+
+class animsize extends StatefulWidget {
+  const animsize({Key? key}) : super(key: key);
+
+  @override
+  State<animsize> createState() => _animsizeState();
+}
+
+class _animsizeState extends State<animsize> {
+  bool a = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedSize(
+              duration: Duration(
+                milliseconds: 500,
+              ),
+              child: FlutterLogo(size: a ? 100 : 200),
+            ),
+            ElevatedButton(
+                onPressed: () => setState(() {
+                      a = !a;
+                    }),
+                child: Text("animatedsize"))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class animwidget extends StatefulWidget {
+  const animwidget({Key? key}) : super(key: key);
+
+  @override
+  State<animwidget> createState() => _animwidgetState();
+}
+
+class _animwidgetState extends State<animwidget> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  @override
+  void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..repeat();
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: SpinningContainer(controller: _controller)),
+    );
+  }
+}
+
+class SpinningContainer extends AnimatedWidget {
+  const SpinningContainer({Key? key, required AnimationController controller})
+      : super(key: key, listenable: controller);
+  Animation<double> get _progress => listenable as Animation<double>;
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+        angle: _progress.value * 2.0 * pi,
+        child: FlutterLogo(
+          size: 100,
+        ));
+  }
+}
+
+
+class fadetran extends StatefulWidget {
+  const fadetran({Key? key}) : super(key: key);
+
+  @override
+  State<fadetran> createState() => _fadetranState();
+}
+
+class _fadetranState extends State<fadetran> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..repeat(reverse: true);
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: FadeTransition(
+          opacity: _animation,
+          child: Container(
+            height: 100,
+            width: 100,
+            color: Colors.brown,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class positionanim extends StatefulWidget {
+  const positionanim({Key? key}) : super(key: key);
+
+  @override
+  State<positionanim> createState() => _positionanimState();
+}
+
+class _positionanimState extends State<positionanim>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  @override
+  void initState() {
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1000));
+    super.initState();
+  }
+
+  bool _first = true;
+
+  RelativeRectTween _rectTween = RelativeRectTween(
+    begin: RelativeRect.fromLTRB(40, 40, 0, 0),
+    end: RelativeRect.fromLTRB(0, 0, 40, 40),
+  );
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            width: 300,
+            child: Stack(children: [
+              PositionedTransition(
+                  rect: _rectTween.animate(_controller),
+                  child: Container(
+                      height: 100,
+                      width: 100,
+                      child: Text(
+                        "data",
+                        style: TextStyle(color: Colors.black),
+                      ))),
+            ]),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          FlatButton(
+            onPressed: () {
+              if (_first) {
+                _controller.forward();
+              } else {
+                _controller.reverse();
+              }
+              _first = !_first;
+            },
+            child: Text(
+              "CLICK ME!",
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class scaltra extends StatefulWidget {
+  const scaltra({Key? key}) : super(key: key);
+
+  @override
+  State<scaltra> createState() => _scaltraState();
+}
+
+class _scaltraState extends State<scaltra> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 500), value: 1)
+      ..repeat(reverse: true);
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.bounceIn);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: ScaleTransition(
+          scale: _animation,
+          alignment: Alignment.center,
+          child: FlutterLogo(
+            size: 100,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class decoranim extends StatefulWidget {
+  const decoranim({Key? key}) : super(key: key);
+
+  @override
+  State<decoranim> createState() => _decoranimState();
+}
+
+class _decoranimState extends State<decoranim> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  @override
+  void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..repeat(reverse: true);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  final decorationTween = DecorationTween(
+    begin: BoxDecoration(
+      gradient: RadialGradient(
+        center: Alignment.center,
+        colors: <Color>[
+          Color(0xFFEEEEEE),
+          Color(0xFF111133),
+        ],
+        // stops: <double>[0.9, 1.0],
+      ),
+    ),
+    end: BoxDecoration(
+      gradient: RadialGradient(
+        center: Alignment.center,
+        colors: <Color>[
+          Colors.blueGrey,
+          Colors.greenAccent,
+        ],
+        //stops: <double>[0.9, 1.0],
+      ),
+    ),
+  );
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: DecoratedBoxTransition(
+          position: DecorationPosition.foreground,
+          decoration: decorationTween.animate(_controller),
+          child: Container(
+            width: 100,
+            height: 100,
+            padding: EdgeInsets.all(10),
+          ),
+        ),
+      ),
+    );
+  }
+}
