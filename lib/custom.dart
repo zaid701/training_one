@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'model.dart';
 
@@ -2035,6 +2036,480 @@ class _decoranimState extends State<decoranim> with TickerProviderStateMixin {
           ),
         ),
       ),
+    );
+  }
+}
+
+class hero extends StatefulWidget {
+  const hero({Key? key}) : super(key: key);
+
+  @override
+  State<hero> createState() => _heroState();
+}
+
+class _heroState extends State<hero> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListTile(
+        leading: Hero(
+          tag: 'hero-rectangle',
+          child: Container(
+            height: 40,
+            width: 40,
+            color: Colors.red,
+          ),
+        ),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+            builder: (BuildContext context) => hero2())),
+        title: const Text('Tap on the icon to view hero animation transition.'),
+      ),
+    );
+  }
+}
+
+class hero2 extends StatefulWidget {
+  const hero2({Key? key}) : super(key: key);
+
+  @override
+  State<hero2> createState() => _hero2State();
+}
+
+class _hero2State extends State<hero2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Hero(
+            tag: 'hero-rectangle',
+            child: Container(
+              height: 200,
+              width: 200,
+              color: Colors.red,
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}
+
+class sizetransanim extends StatefulWidget {
+  const sizetransanim({Key? key}) : super(key: key);
+
+  @override
+  State<sizetransanim> createState() => _sizetransanimState();
+}
+
+class _sizetransanimState extends State<sizetransanim>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    )..repeat(
+        reverse: true,
+      ); // automatically animation will be started
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: SizeTransition(
+          child: Image.asset(
+            'asset/asda.jpg',
+          ),
+          sizeFactor: CurvedAnimation(
+            curve: Curves.fastOutSlowIn,
+            parent: controller,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class rotatetrananim extends StatefulWidget {
+  const rotatetrananim({Key? key}) : super(key: key);
+
+  @override
+  State<rotatetrananim> createState() => _rotatetrananimState();
+}
+
+class _rotatetrananimState extends State<rotatetrananim>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2))
+          ..repeat();
+    _animation = CurvedAnimation(parent: controller, curve: Curves.linear);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: RotationTransition(
+          turns: _animation,
+          child: Text(
+            "Zaid",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 30),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class pagetran extends StatefulWidget {
+  const pagetran({Key? key}) : super(key: key);
+
+  @override
+  State<pagetran> createState() => _pagetranState();
+}
+
+class _pagetranState extends State<pagetran> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("first pagw"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => Navigator.push(
+              context,
+              PageTransition(
+                  child: pagetran2(), type: PageTransitionType.bottomToTop)),
+          child: Text("press"),
+        ),
+      ),
+    );
+  }
+}
+
+class pagetran2 extends StatefulWidget {
+  const pagetran2({Key? key}) : super(key: key);
+
+  @override
+  State<pagetran2> createState() => _pagetran2State();
+}
+
+class _pagetran2State extends State<pagetran2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("second page"),
+      ),
+    );
+  }
+}
+
+class dismissi extends StatefulWidget {
+  const dismissi({Key? key}) : super(key: key);
+
+  @override
+  State<dismissi> createState() => _dismissiState();
+}
+
+class _dismissiState extends State<dismissi> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) => Dismissible(
+          key: Key("dis"),
+          
+          background: slideRightBackground(),
+          secondaryBackground: slideLeftBackground(),
+        
+          confirmDismiss: (a) async{
+            return false;
+          },
+          child: ListTile(
+            title: Text(
+              "Item $index",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget slideLeftBackground() {
+    return Container(
+      color: Colors.red,
+      child: Align(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+            Text(
+              " Delete",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.right,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
+        ),
+        alignment: Alignment.centerRight,
+      ),
+    );
+  }
+
+  Widget slideRightBackground() {
+    return Container(
+      color: Colors.green,
+      child: Align(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.edit,
+              color: Colors.white,
+            ),
+            Text(
+              " Edit",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+        alignment: Alignment.centerLeft,
+      ),
+    );
+  }
+}
+
+class absorbpointe extends StatefulWidget {
+  const absorbpointe({Key? key}) : super(key: key);
+
+  @override
+  State<absorbpointe> createState() => _absorbpointeState();
+}
+
+class _absorbpointeState extends State<absorbpointe> {
+  bool a = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AbsorbPointer(
+          absorbing: a,
+            child: ElevatedButton(
+                onPressed: () => ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text("button pressed"))),
+                child: Text("press")),
+          ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(),
+              ),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Switch(value: a, onChanged: (value)=>
+                  setState(() {
+                    a=value;
+                  })),
+                ],
+              )
+        ],
+
+      ),
+    );
+  }
+}
+
+class gasture extends StatefulWidget {
+  const gasture({Key? key}) : super(key: key);
+
+  @override
+  State<gasture> createState() => _gastureState();
+}
+
+class _gastureState extends State<gasture> {
+  Color cl = Colors.red;
+  Text tx = Text("red");
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: GestureDetector(
+          onTap: () => setState(() {
+            cl = Colors.green;
+            tx = Text("green");
+          }),
+          onDoubleTap: () => setState(() {
+            cl = Colors.blue;
+            tx = Text("blue");
+          }),
+          onLongPress:  () => setState(() {
+            cl = Colors.red;
+            tx = Text("red");
+          }),
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+                color: cl, borderRadius: BorderRadius.circular(15)),
+            child: Center(child: tx),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ignorepoint extends StatefulWidget {
+  const ignorepoint({Key? key}) : super(key: key);
+
+  @override
+  State<ignorepoint> createState() => _ignorepointState();
+}
+
+class _ignorepointState extends State<ignorepoint> {
+  bool _ignore = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IgnorePointer(
+            ignoring: _ignore,
+              child: Center(
+            child: ElevatedButton(
+              onPressed: () => ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Button was clicked"))),
+              child: Text("press"),
+            ),
+          )),
+          Switch(value: _ignore, onChanged:(a)=>setState(() {
+            _ignore=a;
+          }))
+        ],
+      ),
+    );
+  }
+}
+
+class dragevent extends StatefulWidget {
+  const dragevent({Key? key}) : super(key: key);
+
+  @override
+  State<dragevent> createState() => _drageventState();
+}
+
+class _drageventState extends State<dragevent> {
+  bool _issuc = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Draggable(
+              child: FlutterLogo(size: 100),
+              feedback: FlutterLogo(
+                size: 100,
+              ),
+              childWhenDragging: Container(),
+              data: ["zaid"],
+            ),
+          ),
+          Container(
+            child: DragTarget(
+              builder: (context, can, rijc) {
+                return _issuc
+                    ? Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.blueGrey,
+                        child: FlutterLogo(
+                          size: 100,
+                        ),
+                      )
+                    : Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.blueGrey,
+                      );
+              },
+              onWillAccept: (data) {
+                          return true;
+              },
+              onAcceptWithDetails: (data) {
+               
+              },
+              onAccept: (data) {
+                setState(() {
+                  _issuc = true;
+                });
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class interactiveimg extends StatefulWidget {
+  const interactiveimg({Key? key}) : super(key: key);
+
+  @override
+  State<interactiveimg> createState() => _interactiveimgState();
+}
+
+class _interactiveimgState extends State<interactiveimg> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: InteractiveViewer(
+          child: Image(image: Image.asset("asset/asda.jpg").image)),
     );
   }
 }
