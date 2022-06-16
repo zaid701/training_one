@@ -37,6 +37,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   fluttertoast: ^8.0.9
   page_transition: "^2.0.5"
+  sliver_header_delegate: ^0.0.5
 
 dev_dependencies:
   flutter_test:

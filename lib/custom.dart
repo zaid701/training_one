@@ -3,10 +3,12 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sliver_header_delegate/sliver_header_delegate.dart';
 
 import 'model.dart';
 
@@ -2508,8 +2510,131 @@ class _interactiveimgState extends State<interactiveimg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: InteractiveViewer(
+      body: InteractiveViewer(maxScale: 10,
           child: Image(image: Image.asset("asset/asda.jpg").image)),
     );
   }
 }
+
+class Slivernav extends StatefulWidget {
+  const Slivernav({Key? key}) : super(key: key);
+
+  @override
+  State<Slivernav> createState() => _SlivernavState();
+}
+
+class _SlivernavState extends State<Slivernav> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          CupertinoSliverNavigationBar(
+            backgroundColor: Colors.amber,
+            leading: CupertinoNavigationBarBackButton(
+              onPressed: () {},
+              color: CupertinoColors.activeBlue,
+            ),
+            middle: Text("Cupertino example"),
+            trailing: CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: Text("Done"),
+                onPressed: () {}),
+            largeTitle: Text("zaid"),
+          ),
+          SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) => Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                            color: CupertinoColors.systemGrey3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.network(
+                                "https://media.istockphoto.com/photos/beautiful-meadow-field-with-fresh-grass-and-yellow-dandelion-flowers-picture-id1301592082",
+                                fit: BoxFit.fill,
+                              ),
+                            )),
+                      ),
+                  childCount: 10))
+        ],
+      ),
+    );
+  }
+}
+
+class sliverlistdel extends StatefulWidget {
+  const sliverlistdel({Key? key}) : super(key: key);
+
+  @override
+  State<sliverlistdel> createState() => _sliverlistdelState();
+}
+
+class _sliverlistdelState extends State<sliverlistdel> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: CustomScrollView(slivers: [
+      SliverPersistentHeader(
+          pinned: true,
+          delegate: FlexibleHeaderDelegate(
+            leading: CupertinoNavigationBarBackButton(
+              color: CupertinoColors.activeGreen,
+              onPressed: () {},
+            ),
+            statusBarHeight: MediaQuery.of(context).padding.top,
+            expandedHeight: 250,
+            background: MutableBackground(
+              expandedWidget: Image.asset(
+                "asset/spider.jpg",
+                fit: BoxFit.cover,
+              ),
+              collapsedColor: Colors.amberAccent,
+            ),
+          )),
+      SliverGrid(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 100,
+            childAspectRatio: 2 / 3,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5),
+        delegate: SliverChildBuilderDelegate((context, index) => Container(
+              height: 200,
+              color: Colors.blueGrey,
+            )),
+      ),
+    ]));
+  }
+}
+
+class sliverbox extends StatefulWidget {
+  const sliverbox({Key? key}) : super(key: key);
+
+  @override
+  State<sliverbox> createState() => _sliverboxState();
+}
+
+class _sliverboxState extends State<sliverbox> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(slivers: [SliverToBoxAdapter(child: ror())]),
+    );
+  }
+}
+
+Widget ror() => Center(
+      child: Container(
+        height: 500,
+        width: 300,
+        child: Image.asset(
+          "asset/spider.jpg",
+          fit: BoxFit.cover,
+        ),
+      ),
+    );

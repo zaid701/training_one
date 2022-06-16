@@ -2,8 +2,10 @@
 
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sliver_header_delegate/sliver_header_delegate.dart';
 import 'package:training_one/custom.dart';
 import 'package:training_one/theme.dart';
 
@@ -24,8 +26,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: changabltheme().gettheme(),
-      home: interactiveimg(),
+      home: sliverbox(),
     );
   }
 }
