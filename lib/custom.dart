@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, deprecated_member_use, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
@@ -2638,3 +2639,655 @@ Widget ror() => Center(
         ),
       ),
     );
+    
+class Cupertinoactionsheet extends StatefulWidget {
+  const Cupertinoactionsheet({Key? key}) : super(key: key);
+
+  @override
+  State<Cupertinoactionsheet> createState() => _CupertinoactionsheetState();
+}
+
+class _CupertinoactionsheetState extends State<Cupertinoactionsheet> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: ElevatedButton(
+          child: Text("Click"),
+          onPressed: () => showCupertinoModalPopup(
+              context: context,
+              builder: (context) => CupertinoActionSheet(
+                    title: Text("Cupertino"),
+                    message: Text("Select any One"),
+                    actions: [
+                      CupertinoActionSheetAction(
+                          onPressed: () {
+                            Fluttertoast.showToast(msg: "Action1");
+                            Navigator.pop(context);
+                          },
+                          child: Text("Action 1")),
+                      CupertinoActionSheetAction(
+                          onPressed: () {
+                            Fluttertoast.showToast(msg: "Action2");
+                            Navigator.pop(context);
+                          },
+                          child: Text("Action 2")),
+                      CupertinoActionSheetAction(
+                          onPressed: () {
+                            Fluttertoast.showToast(msg: "Action3");
+                            Navigator.pop(context);
+                          },
+                          child: Text("Action 3")),
+                    ],
+                    cancelButton: CupertinoActionSheetAction(
+                        onPressed: () {
+                          Fluttertoast.showToast(msg: "Cancle");
+                          Navigator.pop(context);
+                        },
+                        child: Text("Cancle")),
+                  )),
+        ),
+      ),
+    );
+  }
+}
+
+class Cupertinoactivityindicator extends StatefulWidget {
+  const Cupertinoactivityindicator({Key? key}) : super(key: key);
+
+  @override
+  State<Cupertinoactivityindicator> createState() =>
+      _CupertinoactivityindicatorState();
+}
+
+class _CupertinoactivityindicatorState
+    extends State<Cupertinoactivityindicator> {
+  double value = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CupertinoActivityIndicator.partiallyRevealed(
+              progress: value,
+              radius: 20,
+              color: Colors.blue,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () =>
+                    Timer.periodic(Duration(seconds: 1), (Timer t) {
+                      setState(() {
+                        value==1? value=0:
+                        value = value + 0.2;
+                      });
+                    }),
+                child: Text("click"))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class Cupertinoalertdialog extends StatefulWidget {
+  const Cupertinoalertdialog({Key? key}) : super(key: key);
+
+  @override
+  State<Cupertinoalertdialog> createState() => _CupertinoalertdialogState();
+}
+
+class _CupertinoalertdialogState extends State<Cupertinoalertdialog> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => CupertinoAlertDialog(
+                    title: Text("Cupertino ALert Dialog"),
+                    content: Text("Click On Actions"),
+                    actions: [
+                      CupertinoDialogAction(
+                        child: Text("Okay"),
+                        onPressed: () {
+                          Fluttertoast.showToast(msg: "Okay");
+                          Navigator.pop(context);
+                        },
+                      ),
+                      CupertinoDialogAction(
+                        child: Text("Cancel"),
+                        onPressed: () {
+                          Fluttertoast.showToast(msg: "Cancel");
+                          Navigator.pop(context);
+                        },
+                      ),
+                      CupertinoDialogAction(
+                          child: Text("Maybe"),
+                          onPressed: () {
+                            Fluttertoast.showToast(msg: "Maybe");
+                            Navigator.pop(context);
+                          })
+                    ],
+                  ),
+                ),
+            child: Text("Press")),
+      ),
+    );
+  }
+}
+
+class Cupbutandconmenu extends StatefulWidget {
+  const Cupbutandconmenu({Key? key}) : super(key: key);
+
+  @override
+  State<Cupbutandconmenu> createState() => _CupbutandconmenuState();
+}
+
+class _CupbutandconmenuState extends State<Cupbutandconmenu> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          children: [
+            CupertinoContextMenu(actions: [
+              CupertinoContextMenuAction(
+                child: Text("SAVE"),
+                onPressed: () => Navigator.pop(context),
+              ),
+              CupertinoContextMenuAction(
+                child: Text(
+                  "SAVE",
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ], child: Image.asset("asset/spider.jpg")),
+            CupertinoButton(
+              child: Text("Cupertino Dialog"),
+              onPressed: () {
+                showCupertinoDialog(
+                    context: context,
+                    builder: (context) => Container(
+                      child: Center(
+                        child: Container(
+                              height: 100,
+                              width: 300,
+                              color: Colors.white.withOpacity(0.7),
+                              child: Center(
+                                child: CupertinoButton(child: Text("Exit"), onPressed:()=>Navigator.pop(context)),
+                              ),
+                            ),
+                      ),
+                    ));
+              },
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            Container(
+              height: 400,
+              child: CupertinoDatePicker(
+                  maximumYear: 2022,
+                  minimumYear: 2001,
+                  onDateTimeChanged: (date) {}),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class fullscreendialogtran extends StatefulWidget {
+  const fullscreendialogtran({Key? key}) : super(key: key);
+
+  @override
+  State<fullscreendialogtran> createState() => _fullscreendialogtranState();
+}
+
+class _fullscreendialogtranState extends State<fullscreendialogtran>
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+  @override
+  void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          CupertinoFullscreenDialogTransition(
+              primaryRouteAnimation: _animationController,
+              secondaryRouteAnimation: _animationController,
+              child: Container(
+                height: 100,
+                width: 300,
+                color: Colors.brown,
+              ),
+              linearTransition: false),
+          Center(
+            child: Row(
+              children: [
+                CupertinoButton(
+                  child: Text("Forward"),
+                  onPressed: () {
+                    _animationController.forward();
+                  },
+                  color: Colors.blueGrey,
+                ),
+                CupertinoButton(
+                  child: Text("Revers"),
+                  onPressed: () {
+                    _animationController.reverse();
+                  },
+                  color: Colors.blueGrey,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class cupage extends StatefulWidget {
+  const cupage({Key? key}) : super(key: key);
+
+  @override
+  State<cupage> createState() => _cupage();
+}
+
+class _cupage extends State<cupage> {
+  int _count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CupertinoPageScaffold(
+        navigationBar: const CupertinoNavigationBar(
+          middle: Text('Sample Code'),
+        ),
+        child: ListView(
+          children: [
+            CupertinoButton(
+              onPressed: () => setState(() => _count++),
+              child: const Icon(CupertinoIcons.add),
+            ),
+            Center(
+              child: Text('You have pressed the button $_count times.'),
+            ),
+            Center(
+              child: CupertinoButton(
+                child: Text("second Page"),
+                onPressed: () => Navigator.of(context).push(page22.rout()),
+              ),
+            ),
+            Center(
+              child: CupertinoButton(
+                  child: Text("Picker"),
+                  onPressed: () => showCupertinoModalPopup(
+                      context: context,
+                      builder: (c) => Container(
+                            height: 300,
+                            width: 300,
+                            color: Colors.brown[200],
+                            child: Center(
+                              child: CupertinoPicker(
+                                  itemExtent: 30,
+                                  onSelectedItemChanged: (value) {},
+                                  children: [
+                                    Text("1"),
+                                    Text("2"),
+                                    Text("3"),
+                                    Text("4"),
+                                    Text("5"),
+                                    Text("6"),
+                                  ]),
+                            ),
+                          ))),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class page22 extends StatelessWidget {
+  const page22({Key? key}) : super(key: key);
+  static Route<dynamic> rout() {
+    return CupertinoPageRoute(builder: (context) => const page22());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: FlutterLogo(size: 200),
+      ),
+    );
+  }
+}
+
+class bottomsheetcup extends StatefulWidget {
+  const bottomsheetcup({Key? key}) : super(key: key);
+
+  @override
+  State<bottomsheetcup> createState() => _bottomsheetcupState();
+}
+
+class _bottomsheetcupState extends State<bottomsheetcup> {
+  ScrollController _scrollController = ScrollController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: /*Column(
+        children: [
+          CupertinoButton(
+              child: Text("Click"),
+              onPressed: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => CupertinoPopupSurface(
+                        isSurfacePainted: false,
+                        child: Center(
+                          child: Container(
+                              height: 100,
+                              width: 100,
+                              color: Colors.amberAccent,
+                              child: Center(child: Text("Hellow"))),
+                        ),
+                      ))),*/
+            CupertinoScrollbar(
+                thickness: 12,
+                controller: _scrollController,
+                radius: Radius.circular(10),
+                thicknessWhileDragging: 8,
+                isAlwaysShown: true,
+                child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: 20,
+                    itemBuilder: (c, i) => ListTile(
+                          title: Text("Index $i"),
+                        )))
+        //  ],
+        //),
+        );
+  }
+}
+
+class segmentcup extends StatefulWidget {
+  const segmentcup({Key? key}) : super(key: key);
+
+  @override
+  State<segmentcup> createState() => _segmentcupState();
+}
+
+class _segmentcupState extends State<segmentcup> {
+  String _string = "A";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_string),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            CupertinoSegmentedControl(children: {
+              'A': Container(
+                height: 100,
+                width: 100,
+                color: Colors.brown[200],
+                child: Center(
+                  child: Text("a"),
+                ),
+              ),
+              'B': Container(
+                height: 100,
+                width: 100,
+                color: Colors.brown[400],
+                child: Center(
+                  child: Text("b"),
+                ),
+              ),
+              'C': Container(
+                height: 100,
+                width: 100,
+                color: Colors.brown[600],
+                child: Center(
+                  child: Text("c"),
+                ),
+              ),
+              'D': Container(
+                height: 100,
+                width: 100,
+                color: Colors.brown[800],
+                child: Center(
+                  child: Text("d"),
+                ),
+              ),
+            }, onValueChanged: (v) => setState(() => _string = v.toString()))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class cupslider extends StatefulWidget {
+  const cupslider({Key? key}) : super(key: key);
+
+  @override
+  State<cupslider> createState() => _cupsliderState();
+}
+
+class _cupsliderState extends State<cupslider> {
+  int val = 1;
+  bool onoff = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(val.toString()),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Center(
+              child: /*CupertinoSlider(
+                min: 0,
+                max: 100,
+                value: val,
+                onChanged: (val1) => setState(() => val = val1)),*/
+                  CupertinoSlidingSegmentedControl(children: {
+            1: Container(
+              height: 100,
+              width: 100,
+              color: Colors.brown[200],
+              child: Center(
+                child: Text("a"),
+              ),
+            ),
+            2: Container(
+              height: 100,
+              width: 100,
+              color: Colors.brown[400],
+              child: Center(
+                child: Text("b"),
+              ),
+            ),
+            3: Container(
+              height: 100,
+              width: 100,
+              color: Colors.brown[600],
+              child: Center(
+                child: Text("c"),
+              ),
+            ),
+            4: Container(
+              height: 100,
+              width: 100,
+              color: Colors.brown[800],
+              child: Center(
+                child: Text("d"),
+              ),
+            ),
+          }, onValueChanged: (v) => setState(() => val = v as int))),
+          CupertinoSwitch(
+              value: onoff, onChanged: (v) => setState(() => onoff = v))
+        ],
+      ),
+    );
+  }
+}
+
+class cuptabscafold extends StatefulWidget {
+  const cuptabscafold({Key? key}) : super(key: key);
+
+  @override
+  State<cuptabscafold> createState() => _cuptabscafoldState();
+}
+
+class _cuptabscafoldState extends State<cuptabscafold> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home)),
+          BottomNavigationBarItem(icon: Icon(Icons.menu)),
+        ],
+      ),
+      tabBuilder: (BuildContext context, int index) {
+        return CupertinoTabView(builder: (BuildContext context) {
+          return index == 0 ? firstpage() : firstpage1();
+        });
+      },
+    );
+  }
+}
+
+class firstpage extends StatefulWidget {
+  const firstpage({Key? key}) : super(key: key);
+
+  @override
+  State<firstpage> createState() => _firstpageState();
+}
+
+class _firstpageState extends State<firstpage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.brown[400],
+      body: Center(
+        child: Column(
+          children: [
+            Text("page1"),
+            CupertinoButton(
+                child: Text("goto next page"),
+                onPressed: () => Navigator.of(context)
+                    .push(CupertinoPageRoute(builder: (c) => firstpage2())))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class firstpage2 extends StatefulWidget {
+  const firstpage2({Key? key}) : super(key: key);
+
+  @override
+  State<firstpage2> createState() => _firstpage2State();
+}
+
+class _firstpage2State extends State<firstpage2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.brown[400],
+      body: Center(
+        child: Column(
+          children: [
+            Text("page2"),
+            CupertinoButton(
+                child: Text("back"),
+                onPressed: () => Navigator.pop(context))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class firstpage1 extends StatefulWidget {
+  const firstpage1({Key? key}) : super(key: key);
+
+  @override
+  State<firstpage1> createState() => _firstpageState1();
+}
+
+class _firstpageState1 extends State<firstpage1> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.brown[200],
+      body: Center(
+        child: Column(
+          children: [
+            Text("page1"),
+            CupertinoButton(
+                child: Text("goto next page"),
+                onPressed: () => Navigator.of(context)
+                    .push(CupertinoPageRoute(builder: (c) => firstpage21())))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class firstpage21 extends StatefulWidget {
+  const firstpage21({Key? key}) : super(key: key);
+
+  @override
+  State<firstpage21> createState() => _firstpage21State();
+}
+
+class _firstpage21State extends State<firstpage21> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.brown[200],
+      body: Center(
+        child: Column(
+          children: [
+            Text("page2"),
+            CupertinoButton(
+                child: Text("back"),
+                onPressed: () => Navigator.pop(context))
+          ],
+        ),
+      ),
+    );
+  }
+}

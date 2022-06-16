@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^8.0.9
   page_transition: "^2.0.5"
   sliver_header_delegate: ^0.0.5
+  flutter_cupertino_date_picker: ^1.0.26+2
 
 dev_dependencies:
   flutter_test:
