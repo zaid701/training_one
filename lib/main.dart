@@ -25,44 +25,48 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: Cupbutandconmenu(),
+      home: sliverfill(),
     );
   }
 }
 
-class cuptextfield extends StatefulWidget {
-  const cuptextfield({Key? key}) : super(key: key);
+class sliverfill extends StatefulWidget {
+  const sliverfill({Key? key}) : super(key: key);
 
   @override
-  State<cuptextfield> createState() => _cuptextfieldState();
+  State<sliverfill> createState() => _sliverfillState();
 }
 
-class _cuptextfieldState extends State<cuptextfield> {
-  bool _selected = false;
+class _sliverfillState extends State<sliverfill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CupertinoTextField(),
-          ChoiceChip(
-              selected: _selected,
-              label: Text('Woolha'),
-              avatar: Text('W'),
-              elevation: 10,
-              pressElevation: 5,
-              shadowColor: Colors.teal,
-              onSelected: (bool selected) {
-                print('Fluter is pressed');
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
+              height: 100,
+            ),
+          ),
+           SliverToBoxAdapter(
+            child: Container(
+              height: 100,
+            ),
+          ),
 
-                setState(() {
-                  _selected = !_selected;
-                });
-              })
-        ],
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Container(
+              color: Colors.brown[200],
+              child: Icon(
+                Icons.sentiment_very_satisfied,
+                color: Colors.brown[800],
+                size: 30,
+              ),
+            ),
+          ),
+                 ],
       ),
     );
   }

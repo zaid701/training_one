@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, camel_case_types, deprecated_member_use, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, camel_case_types, deprecated_member_use, prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_final_fields
 
 import 'dart:async';
 import 'dart:math';
@@ -1712,7 +1712,7 @@ class _animlistState extends State<animlist> {
   void _addItem() {
     item.insert(item.length, item.length);
     _globalKey.currentState!
-        .insertItem(item.length-1, duration: const Duration(seconds: 1));
+        .insertItem(item.length - 1, duration: const Duration(seconds: 1));
   }
 
   @override
@@ -1791,6 +1791,7 @@ class _animwidgetState extends State<animwidget> with TickerProviderStateMixin {
           ..repeat();
     super.initState();
   }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -1819,7 +1820,6 @@ class SpinningContainer extends AnimatedWidget {
         ));
   }
 }
-
 
 class fadetran extends StatefulWidget {
   const fadetran({Key? key}) : super(key: key);
@@ -1863,7 +1863,6 @@ class _fadetranState extends State<fadetran> with TickerProviderStateMixin {
     );
   }
 }
-
 
 class positionanim extends StatefulWidget {
   const positionanim({Key? key}) : super(key: key);
@@ -2171,7 +2170,8 @@ class _rotatetrananimState extends State<rotatetrananim>
           turns: _animation,
           child: Text(
             "Zaid",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 30),
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
           ),
         ),
       ),
@@ -2240,11 +2240,9 @@ class _dismissiState extends State<dismissi> {
         itemCount: 10,
         itemBuilder: (context, index) => Dismissible(
           key: Key("dis"),
-          
           background: slideRightBackground(),
           secondaryBackground: slideLeftBackground(),
-        
-          confirmDismiss: (a) async{
+          confirmDismiss: (a) async {
             return false;
           },
           child: ListTile(
@@ -2334,28 +2332,27 @@ class _absorbpointeState extends State<absorbpointe> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AbsorbPointer(
-          absorbing: a,
+            absorbing: a,
             child: ElevatedButton(
                 onPressed: () => ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text("button pressed"))),
                 child: Text("press")),
           ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(),
-              ),
-              
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Switch(value: a, onChanged: (value)=>
-                  setState(() {
-                    a=value;
-                  })),
-                ],
-              )
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Switch(
+                  value: a,
+                  onChanged: (value) => setState(() {
+                        a = value;
+                      })),
+            ],
+          )
         ],
-
       ),
     );
   }
@@ -2385,7 +2382,7 @@ class _gastureState extends State<gasture> {
             cl = Colors.blue;
             tx = Text("blue");
           }),
-          onLongPress:  () => setState(() {
+          onLongPress: () => setState(() {
             cl = Colors.red;
             tx = Text("red");
           }),
@@ -2419,17 +2416,19 @@ class _ignorepointState extends State<ignorepoint> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IgnorePointer(
-            ignoring: _ignore,
+              ignoring: _ignore,
               child: Center(
-            child: ElevatedButton(
-              onPressed: () => ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Button was clicked"))),
-              child: Text("press"),
-            ),
-          )),
-          Switch(value: _ignore, onChanged:(a)=>setState(() {
-            _ignore=a;
-          }))
+                child: ElevatedButton(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Button was clicked"))),
+                  child: Text("press"),
+                ),
+              )),
+          Switch(
+              value: _ignore,
+              onChanged: (a) => setState(() {
+                    _ignore = a;
+                  }))
         ],
       ),
     );
@@ -2481,11 +2480,9 @@ class _drageventState extends State<dragevent> {
                       );
               },
               onWillAccept: (data) {
-                          return true;
+                return true;
               },
-              onAcceptWithDetails: (data) {
-               
-              },
+              onAcceptWithDetails: (data) {},
               onAccept: (data) {
                 setState(() {
                   _issuc = true;
@@ -2511,7 +2508,8 @@ class _interactiveimgState extends State<interactiveimg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: InteractiveViewer(maxScale: 10,
+      body: InteractiveViewer(
+          maxScale: 10,
           child: Image(image: Image.asset("asset/asda.jpg").image)),
     );
   }
@@ -2639,7 +2637,7 @@ Widget ror() => Center(
         ),
       ),
     );
-    
+
 class Cupertinoactionsheet extends StatefulWidget {
   const Cupertinoactionsheet({Key? key}) : super(key: key);
 
@@ -2725,8 +2723,7 @@ class _CupertinoactivityindicatorState
                 onPressed: () =>
                     Timer.periodic(Duration(seconds: 1), (Timer t) {
                       setState(() {
-                        value==1? value=0:
-                        value = value + 0.2;
+                        value == 1 ? value = 0 : value = value + 0.2;
                       });
                     }),
                 child: Text("click"))
@@ -2736,7 +2733,6 @@ class _CupertinoactivityindicatorState
     );
   }
 }
-
 
 class Cupertinoalertdialog extends StatefulWidget {
   const Cupertinoalertdialog({Key? key}) : super(key: key);
@@ -2821,17 +2817,19 @@ class _CupbutandconmenuState extends State<Cupbutandconmenu> {
                 showCupertinoDialog(
                     context: context,
                     builder: (context) => Container(
-                      child: Center(
-                        child: Container(
+                          child: Center(
+                            child: Container(
                               height: 100,
                               width: 300,
                               color: Colors.white.withOpacity(0.7),
                               child: Center(
-                                child: CupertinoButton(child: Text("Exit"), onPressed:()=>Navigator.pop(context)),
+                                child: CupertinoButton(
+                                    child: Text("Exit"),
+                                    onPressed: () => Navigator.pop(context)),
                               ),
                             ),
-                      ),
-                    ));
+                          ),
+                        ));
               },
               color: Colors.blueGrey,
               borderRadius: BorderRadius.circular(20),
@@ -2839,7 +2837,7 @@ class _CupbutandconmenuState extends State<Cupbutandconmenu> {
             Container(
               height: 400,
               child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.time,
+                  mode: CupertinoDatePickerMode.time,
                   onDateTimeChanged: (date) {}),
             )
           ],
@@ -3231,8 +3229,7 @@ class _firstpage2State extends State<firstpage2> {
           children: [
             Text("page2"),
             CupertinoButton(
-                child: Text("back"),
-                onPressed: () => Navigator.pop(context))
+                child: Text("back"), onPressed: () => Navigator.pop(context))
           ],
         ),
       ),
@@ -3286,10 +3283,267 @@ class _firstpage21State extends State<firstpage21> {
           children: [
             Text("page2"),
             CupertinoButton(
-                child: Text("back"),
-                onPressed: () => Navigator.pop(context))
+                child: Text("back"), onPressed: () => Navigator.pop(context))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class cuptextfield extends StatefulWidget {
+  const cuptextfield({Key? key}) : super(key: key);
+
+  @override
+  State<cuptextfield> createState() => _cuptextfieldState();
+}
+
+class _cuptextfieldState extends State<cuptextfield> {
+  bool _selected = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CupertinoTextField(),
+          ChoiceChip(
+              selected: _selected,
+              label: Text('Woolha'),
+              avatar: Text('W'),
+              elevation: 10,
+              pressElevation: 5,
+              shadowColor: Colors.teal,
+              onSelected: (bool selected) {
+                setState(() {
+                  _selected = !_selected;
+                });
+              })
+        ],
+      ),
+    );
+  }
+}
+
+class gridtile extends StatefulWidget {
+  const gridtile({Key? key}) : super(key: key);
+
+  @override
+  State<gridtile> createState() => _gridtileState();
+}
+
+class _gridtileState extends State<gridtile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: GridView.builder(
+        itemCount: 20,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 3,
+          mainAxisSpacing: 3,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return GridTile(
+              child: Image.asset("asset/asda.jpg"),
+              header: Text(index.toString()),
+              footer: GridTileBar(
+                  backgroundColor: Colors.blueGrey,
+                  leading: Icon(Icons.abc),
+                  title: Text("item $index"),
+                  trailing: Icon(
+                    Icons.read_more,
+                  )));
+        },
+      ),
+    );
+  }
+}
+
+class grediant extends StatefulWidget {
+  const grediant({Key? key}) : super(key: key);
+
+  @override
+  State<grediant> createState() => _grediantState();
+}
+
+class _grediantState extends State<grediant> {
+  List<Gradient> gra = [
+    SweepGradient(colors: [Colors.yellow, Colors.green, Colors.blue]),
+    RadialGradient(
+      colors: [Colors.yellow, Colors.red, Colors.purple],
+      center: Alignment(0.6, -0.3),
+      focal: Alignment(0.3, -0.1),
+      focalRadius: 1.0,
+    ),
+    RadialGradient(
+      colors: [Colors.yellow, Colors.red, Colors.purple],
+      focalRadius: 1.0,
+    ),
+    RadialGradient(
+      colors: [Colors.yellow, Colors.red, Colors.purple],
+      center: Alignment(0.6, -0.3),
+      focal: Alignment(0.3, -0.1),
+    ),
+    LinearGradient(
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+        stops: [0.1, 0.5, 0.8, 0.9],
+        colors: [Colors.red, Colors.yellow, Colors.blue, Colors.purple]),
+    LinearGradient(
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+        colors: [Colors.red, Colors.yellow, Colors.blue, Colors.purple]),
+    LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [Colors.purple, Colors.blue])
+  ];
+  int _color = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        decoration: BoxDecoration(gradient: gra[_color]),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Text("+"),
+        onPressed: () => setState(() {
+          _color = _color == 6 ? _color = 0 : _color = _color + 1;
+          // Fluttertoast.showToast(msg: _color.toString());
+        }),
+      ),
+    );
+  }
+}
+
+class rediaolisttile extends StatefulWidget {
+  const rediaolisttile({Key? key}) : super(key: key);
+
+  @override
+  State<rediaolisttile> createState() => _rediaolisttileState();
+}
+
+class _rediaolisttileState extends State<rediaolisttile> {
+  dynamic _group = "A1";
+  dynamic _group1 = "A2";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) => RadioListTile(
+              value: index,
+              groupValue: index > 4 ? _group : _group1,
+              title: Text("index $index"),
+              onChanged: (val1) => setState(() {
+                    index > 4 ? _group = val1 : _group1 = val1;
+                  }))),
+    );
+  }
+}
+
+class switchtile extends StatefulWidget {
+  const switchtile({Key? key}) : super(key: key);
+
+  @override
+  State<switchtile> createState() => _switchtileState();
+}
+
+class _switchtileState extends State<switchtile> {
+  bool a = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Center(
+              child: SwitchListTile(
+                  title: Text("Flutter"),
+                  secondary: Icon(Icons.abc),
+                  tileColor: Colors.blueGrey,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: a,
+                  onChanged: (a1) => setState((() => a = a1))),
+            ),
+            Expanded(
+              child: ShaderMask(
+                shaderCallback: (b) => LinearGradient(
+                        colors: [Colors.blueGrey, Colors.transparent],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)
+                    .createShader(b),
+                child: Container(
+                  color: Colors.brown[200],
+                  child: Image(
+                      image: Image.asset(
+                    "asset/asda.jpg",
+                  ).image),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class statebuilder extends StatelessWidget {
+  const statebuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color getcolor(Set<MaterialState> state) {
+      const Set<MaterialState> intrective = <MaterialState>{
+        MaterialState.hovered,
+        MaterialState.pressed,
+      };
+      return state.any(intrective.contains) ? Colors.blue : Colors.red;
+    }
+
+    int valm = 0;
+    bool v = false;
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          StatefulBuilder(
+            builder: (BuildContext context,
+                void Function(void Function()) setState) {
+              return Column(
+                children: [
+                  TextButton(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith((getcolor))),
+                    onPressed: () {
+                      setState(() => valm = valm + 1);
+                    },
+                    child: Text("click"),
+                  ),
+                  Text(valm.toString()),
+                  CheckboxListTile(
+                      title: Text("title"),
+                      subtitle: Text("subtitle"),
+                      secondary: Icon(Icons.abc),
+                      activeColor: Colors.red,
+                      value: v,
+                      onChanged: (v1) => setState(() => v = v1!))
+                ],
+              );
+            },
+          ),
+        ],
       ),
     );
   }
