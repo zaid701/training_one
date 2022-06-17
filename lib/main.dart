@@ -25,7 +25,45 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: cuptabscafold(),
+      home: Cupbutandconmenu(),
+    );
+  }
+}
+
+class cuptextfield extends StatefulWidget {
+  const cuptextfield({Key? key}) : super(key: key);
+
+  @override
+  State<cuptextfield> createState() => _cuptextfieldState();
+}
+
+class _cuptextfieldState extends State<cuptextfield> {
+  bool _selected = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CupertinoTextField(),
+          ChoiceChip(
+              selected: _selected,
+              label: Text('Woolha'),
+              avatar: Text('W'),
+              elevation: 10,
+              pressElevation: 5,
+              shadowColor: Colors.teal,
+              onSelected: (bool selected) {
+                print('Fluter is pressed');
+
+                setState(() {
+                  _selected = !_selected;
+                });
+              })
+        ],
+      ),
     );
   }
 }

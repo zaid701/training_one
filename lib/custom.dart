@@ -2839,8 +2839,7 @@ class _CupbutandconmenuState extends State<Cupbutandconmenu> {
             Container(
               height: 400,
               child: CupertinoDatePicker(
-                  maximumYear: 2022,
-                  minimumYear: 2001,
+                mode: CupertinoDatePickerMode.time,
                   onDateTimeChanged: (date) {}),
             )
           ],
@@ -3197,7 +3196,8 @@ class _firstpageState extends State<firstpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[400],
+      appBar: AppBar(),
+      backgroundColor: Colors.brown[50],
       body: Center(
         child: Column(
           children: [
@@ -3224,7 +3224,8 @@ class _firstpage2State extends State<firstpage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[400],
+      appBar: AppBar(),
+      backgroundColor: Colors.brown[50],
       body: Center(
         child: Column(
           children: [
@@ -3250,6 +3251,7 @@ class _firstpageState1 extends State<firstpage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.brown[200],
       body: Center(
         child: Column(
@@ -3277,6 +3279,7 @@ class _firstpage21State extends State<firstpage21> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.brown[200],
       body: Center(
         child: Column(
